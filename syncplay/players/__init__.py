@@ -1,3 +1,4 @@
+from syncplay.players.keyboardPlayer import KeyboardPlayer
 from syncplay.players.mplayer import MplayerPlayer
 from syncplay.players.mpv import MpvPlayer
 from syncplay.players.mpvnet import MpvnetPlayer
@@ -20,4 +21,4 @@ except ImportError:
 
 
 def getAvailablePlayers():
-    return [MPCHCAPIPlayer, MpvPlayer, MpvnetPlayer, VlcPlayer, MpcBePlayer, MplayerPlayer, IinaPlayer]
+    return [MPCHCAPIPlayer, MpvPlayer, MpvnetPlayer, VlcPlayer, MpcBePlayer, MplayerPlayer, IinaPlayer, KeyboardPlayer]
