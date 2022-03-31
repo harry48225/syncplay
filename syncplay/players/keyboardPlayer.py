@@ -13,15 +13,29 @@ class KeyboardPlayer(BasePlayer):
         from twisted.internet import reactor
         self.reactor = reactor
         self._client = client
-        self.reactor.callFromThread(self._client.initPlayer, self,)
+        self._paused = False
+        self.reactor.callFromThread(self._client.initPlayer, self)
         print("init keyboard player")
         self.reactor.callFromThread(self._client.updateFile, "owo.mov", 69, "/home/shokushu/videos/homework")
 
+        keyboard.add_hotkey(164, self.togglePaused)
+    
+    def setPaused(self, value):
+        # Toggle the playing state
+        #keyboard.send('play/pause')
+        if (value != self._paused):
+            self._paused = not self._paused
+            keyboard.send(164)
+
+    def togglePaused(self):
+        self._paused = not self._paused
+        print(f"toggled pause to {self._paused}")
+    
     def setPosition(self, value):
         pass
     
     def askForStatus(self):
-        pass
+        self._client.updatePlayerStatus(self._paused, self._client.getGlobalPosition())
 
     def displayMessage(self, message, duration=..., secondaryOSD=False, mood=...):
         pass
@@ -37,10 +51,6 @@ class KeyboardPlayer(BasePlayer):
         print("running keyboard player")
         return KeyboardPlayer(client)
 
-    def setPaused(self, value):
-        # Toggle the playing state
-        #keyboard.send('play/pause')
-        keyboard.send(164)
     @staticmethod
     def getDefaultPlayerPathsList():
         return []
