@@ -39,13 +39,11 @@ class KeyboardPlayer(BasePlayer):
 
     def setPaused(self, value):
         # Toggle the playing state
-        keyboard.send('space')
-        print("SENT SPACE")
-
+        #keyboard.send('play/pause')
+        keyboard.send(164)
     @staticmethod
     def getDefaultPlayerPathsList():
         return []
-
     @staticmethod
     def isValidPlayerPath(path):
         return "keyboard" in path.lower()
